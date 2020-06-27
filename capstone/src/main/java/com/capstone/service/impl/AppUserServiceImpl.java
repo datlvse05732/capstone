@@ -21,14 +21,25 @@ public class AppUserServiceImpl implements AppUserService {
 	private AppUserDAO userDao;
 	@Override
 	public void insert(AppUserDTO userDTO) {
-		AppUser user = new AppUser();
-		user.setUserId(userDTO.getUserId());
+		AppUser user = new AppUser();		
 		user.setUserName(userDTO.getUsername());
 		user.setEncrytedPassword(userDTO.getPassword());
 		user.setEmail(userDTO.getEmail());
 		userDao.insert(user);
 	}
 
+	@Override
+	public AppUserDTO get(Long id) {
+		AppUser user = userDao.get(id);
+		AppUserDTO dto = new AppUserDTO();
+		dto.setUserId(user.getUserId());
+		dto.setUsername(user.getUserName());
+		dto.setPassword(user.getEncrytedPassword());
+		dto.setEmail(user.getEmail());
+		
+		return dto;
+	}
+	
 	@Override
 	public void update(AppUserDTO userDTO) {
 		AppUser user = userDao.get(userDTO.getUserId());
@@ -51,21 +62,12 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public AppUserDTO get(Long id) {
-//		AppUser user = userDao.get(id);
-//		AppUserDTO dto = new AppUserDTO();
-//		dto.setUserName(user.getUsername());
-//		dto.setEncrytedPassword(user.getPassword());
-//		dto.setEmail(user.getEmail());
-		return null;
-	}
-
-	@Override
 	public List<AppUserDTO> search(String name, int start, int length) {
 		List<AppUser> users = userDao.search(name, start, length);
 		List<AppUserDTO> dtos = new ArrayList<AppUserDTO>();
 		for(AppUser u : users) {
 			AppUserDTO dto = new AppUserDTO();
+			dto.setUserId(u.getUserId());
 			dto.setUsername(u.getUserName());
 			dto.setPassword(u.getEncrytedPassword());
 			dto.setEmail(u.getEmail());

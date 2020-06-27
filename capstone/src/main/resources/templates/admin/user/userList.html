@@ -36,7 +36,7 @@
 <td th:text="${user.username}"></td>
 <td th:text="${user.password}"></td>
 <td th:text="${user.email}"></td>
-<td><a th:href="@{'/admin/user/edit?id='+${user.userId}}">Edit</a>
+<td><a th:href="@{'/admin/user/update?id='+${user.userId}}">Edit</a>
 <a th:href="@{'/admin/user/delete?id='+${user.userId}}">Delete</a>
 </td>
 </tr>

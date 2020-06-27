@@ -21,7 +21,6 @@ public class AppUserDAOImpl implements AppUserDAO {
 	
 	@PersistenceContext	
 	
-	@Autowired
 	private EntityManager entityManager;
 	
 	@Autowired
